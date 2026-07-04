@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スマスロ攻略情報アプリ</title>
+<style>
+  :root{
+    --bg:#12141a; --card:#1c2029; --card2:#232836; --line:#333a4d;
+    --txt:#e8eaf0; --sub:#9aa3b8; --accent:#ffb74d; --red:#ff6b6b;
+    --gold:#ffd54f; --green:#69db7c; --blue:#74c0fc; --purple:#c39bd3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--txt); font-family:"Hiragino Sans","Noto Sans JP",sans-serif; font-size:15px; line-height:1.7;}
+  header{padding:14px 16px 8px; text-align:center;}
+  header h1{font-size:19px; color:var(--accent);}
+  header p{font-size:12px; color:var(--sub);}
+  .tabs{display:flex; position:sticky; top:0; z-index:10; background:var(--bg); border-bottom:2px solid var(--line);}
+  .tabs button{flex:1; padding:12px 4px; background:none; border:none; color:var(--sub); font-size:15px; font-weight:bold; cursor:pointer; border-bottom:3px solid transparent;}
+  .tabs button.active{color:var(--accent); border-bottom-color:var(--accent);}
+  main{max-width:860px; margin:0 auto; padding:12px 12px 60px;}
+  .machine{display:none;}
+  .machine.show{display:block;}
+  .meta{background:var(--card2); border-radius:10px; padding:10px 14px; font-size:13px; color:var(--sub); margin-bottom:12px;}
+  details{background:var(--card); border:1px solid var(--line); border-radius:12px; margin-bottom:10px; overflow:hidden;}
+  summary{padding:13px 16px; font-weight:bold; font-size:16px; cursor:pointer; list-style:none; display:flex; align-items:center; gap:8px;}
+  summary::-webkit-details-marker{display:none;}
+  summary::before{content:"▸"; color:var(--accent); transition:transform .15s;}
+  details[open] summary::before{transform:rotate(90deg);}
+  .body{padding:0 16px 16px;}
+  table{width:100%; border-collapse:collapse; margin:8px 0 14px; font-size:14px;}
+  th,td{border:1px solid var(--line); padding:6px 8px; text-align:left;}
+  th{background:var(--card2); color:var(--accent); font-weight:bold; white-space:nowrap;}
+  td.c{text-align:center;}
+  h3{font-size:15px; color:var(--blue); margin:14px 0 4px; border-left:4px solid var(--blue); padding-left:8px;}
+  h4{font-size:14px; color:var(--sub); margin:10px 0 2px;}
+  ul{padding-left:20px; margin:4px 0 10px;}
+  li{margin:2px 0;}
+  .hot{color:var(--red); font-weight:bold;}
+  .gold{color:var(--gold); font-weight:bold;}
+  .good{color:var(--green); font-weight:bold;}
+  .note{font-size:12.5px; color:var(--sub); background:var(--card2); border-radius:8px; padding:8px 12px; margin:8px 0;}
+  .pill{display:inline-block; background:var(--card2); border:1px solid var(--line); border-radius:20px; padding:1px 10px; font-size:12px; color:var(--accent); margin-right:6px;}
+  .src{display:inline-block; font-size:11px; border-radius:4px; padding:0 6px; margin-left:6px; vertical-align:middle;}
+  .src.x{background:#1d3244; color:#74c0fc;}
+  .src.yt{background:#442222; color:#ff8787;}
+  .src.note{background:#2e4433; color:#69db7c;}
+  .src.blog{background:#3d3a22; color:#ffd54f;}
+  .tool{background:var(--card2); border-radius:10px; padding:12px; margin:8px 0;}
+  .tool label{font-size:13px; color:var(--sub); display:block; margin-top:6px;}
+  .tool input[type=number]{width:120px; padding:6px; border-radius:6px; border:1px solid var(--line); background:var(--bg); color:var(--txt); font-size:15px;}
+  .tool .result{margin-top:10px; font-size:14px;}
+  textarea.memo{width:100%; min-height:110px; background:var(--bg); color:var(--txt); border:1px solid var(--line); border-radius:8px; padding:10px; font-size:14px; margin-top:6px;}
+  a{color:var(--blue);}
+  footer{max-width:860px; margin:0 auto; padding:0 16px 40px; font-size:12px; color:var(--sub);}
+</style>
+</head>
+<body>
+<header>
+  <h1>🎰 スマスロ攻略情報アプリ</h1>
+  <p>個人用まとめ | 最終更新: 2026年7月4日(第6版・実戦値と映像解析を追加更新)</p>
+</header>
+
+<div class="tabs">
+  <button class="active" onclick="showTab('sao2',this)">SAO2</button>
+  <button onclick="showTab('otome5',this)">戦国乙女5</button>
+</div>
+
+<main>
+<!-- ============================================================ SAO2 -->
+<section id="sao2" class="machine show">
+  <div class="meta">
+    <b>Lソードアート・オンラインⅡ</b>(大都技研)/ 2026年6月8日導入 / AT機(差枚数管理型)<br>
+    <span class="pill">純増 約3.6枚/G</span><span class="pill">上位AT 約7.2枚/G</span><span class="pill">約31G/50枚</span><span class="pill">機械割 97.6〜114.9%</span><span class="pill">設定6の7000枚突破率 約27.1%</span>
+  </div>
+
+  <details open>
+    <summary>🆕 最新ネタ・実戦情報(SNS/YouTube発)</summary>
+    <div class="body">
+      <h3>2026/7/4 新着動画(直近1週間・新着順取得)</h3>
+      <ul>
+        <li>新着順で確認したが、直近1週間(6/27〜7/4)で目立つ新規の解説・検証動画は無し。新着上位は<a href="https://www.youtube.com/watch?v=gl7buIJz1h4" target="_blank">生配信(7/3)</a>など速報性の低いものが中心で、内容のある動画(6/9〜6/19投稿)は既にリスト済みのものと重複していた。<b>大きな更新なし</b></li>
+      </ul>
+      <h3>2026/7/4 収集分</h3>
+      <ul>
+        <li><span class="src x">X</span>設定6挙動と思われる台で「総回転数7,890G・差枚+13,000枚」の好成績報告。一方で「エピ中+準備中で子役が全く落ちず680枚スタート/950枚スタート」という、<b>AT開始直後の出玉スタート量も高設定挙動の目安になる</b>という報告あり</li>
+        <li><span class="src note">note</span>攻略勢の解説記事より:<b>ウルティマ状態は上位AT中に約1/2の確率で突入</b>する特殊状態で、デス・ガンバトルの勝率を大幅アップさせ期待枚数7,000枚(ウルティマ)を生み出す本体。ただし「デス・ガン開始時のBAR揃い演出が来ないケースがある」など、まだ解析途上の部分もあると率直に指摘されている</li>
+      </ul>
+      <h3>2026/7/3 新着動画(直近1週間・新着順取得)</h3>
+      <ul>
+        <li><span class="src yt">YouTube</span><a href="https://www.youtube.com/watch?v=pmBvQwpuVYM" target="_blank">1週間SAO2の朝イチ生活したら収支はどうなる?(6/25投稿)</a> — リセット狙い(256G天井)を7日間続けた収支検証。映像解析済み(下の🎥セクション参照)</li>
+        <li><span class="src yt">YouTube</span><a href="https://www.youtube.com/watch?v=f_K-0gi2AvM" target="_blank">イナズマトロフィーを後ヅモ!ここからは閉店までだ!</a> — <b>イナズマ(設5以上)トロフィー確認からの後ヅモ実戦</b>。示唆を根拠に夕方から粘る立ち回りの実例</li>
+        <li><span class="src yt">YouTube</span><a href="https://www.youtube.com/watch?v=9ImzQVfqaho" target="_blank">超プレミア絶剣ループがここに【新台神回】</a> — 絶剣の1100枚ループ発生の実映像</li>
+        <li><span class="src yt">YouTube</span><a href="https://www.youtube.com/watch?v=KeYCbVFtbRE" target="_blank">SEVEN'S TV #1608 — 7000枚モード(上位AT)に賭けた結果</a> / <a href="https://www.youtube.com/watch?v=PtuHt4fE2Bo" target="_blank">よしきの成り上がり新台録 — 7000枚突破率27%のウルティマを目指す</a></li>
+      </ul>
+      <h3>2026/7/3 収集分</h3>
+      <ul>
+        <li><span class="src x">X</span><b>「初当たり1/200クラスで軽いがATが辛い」</b>という声が多数。CZ経由の初当りは軽い一方、AT単発だと150枚前後で終わるため<b>上位(デス・ガンバトル)に行けるかが勝負</b>という評価が定着しつつある</li>
+        <li><span class="src x">X</span>推定高設定でも「7,940Gで差枚-2,700枚」というグラフ報告あり → <b>高設定でも荒れる。単日のグラフだけで設定を決めつけない</b></li>
+        <li><span class="src x">X</span>導入店では累計差枚が大きくプラスの店も報告されており(某店で累計+13万枚超の報告)、<b>店側が出しやすい主力機種</b>として扱われている。取材・イベント日の対象になりやすい</li>
+        <li><span class="src x">X</span>朝一投資1,500円→17万7,000円回収の報告など、<b>一撃性能(絶剣・上位AT)の破壊力報告</b>が目立つ</li>
+        <li><span class="src note">note</span>攻略勢の共通見解:<b>「大都技研の中でも知識介入で最も差がつく機種」</b>。液晶ゲーム数のモード管理+メニュー画面のアイテム確認が出来るかどうかで期待値が大きく変わる(詳細は下のモード解説へ)</li>
+        <li><span class="src yt">YouTube</span>攻略系動画の焦点は<b>「モード狙いが肝心」</b>(例: <a href="https://www.youtube.com/watch?v=2S_um_BPhCs" target="_blank">解説動画</a>)。ゾーン(100G/350G)当選履歴からモードを推測して浅いゲーム数から拾う立ち回りが主流になりつつある</li>
+      </ul>
+      <h3>参考になるYouTube動画</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=_5lFiReSiu0" target="_blank">【新台】スマスロSAO2を徹底解説!!</a> — 仕様解説</li>
+        <li><a href="https://www.youtube.com/watch?v=2S_um_BPhCs" target="_blank">SAO2はモード狙いが肝心!?</a> — モード・天井・狙い目解説</li>
+        <li><a href="https://www.youtube.com/watch?v=nESwMdyBx58" target="_blank">SAO2は過去最大上乗せでスマスロの限界超えた?(桜#839)</a> — 上乗せ性能検証</li>
+        <li><a href="https://www.youtube.com/watch?v=py65w-3-6vw" target="_blank">上位AT期待7000枚&絶剣搭載</a> — 上位AT解説</li>
+        <li><a href="https://www.youtube.com/watch?v=EHoiU8kJ1iE" target="_blank">上位AT突入実戦(ヒジカタ)</a> / <a href="https://www.youtube.com/watch?v=yVYzRY6m-rQ" target="_blank">設定5実戦</a> / <a href="https://www.youtube.com/watch?v=MsWOE3tP1xw" target="_blank">1/16384ウルティマチェリー実戦</a></li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>🎥 YouTube深掘り(動画の中身を字幕から抽出)</summary>
+    <div class="body">
+      <p class="note">解説動画の字幕を丸ごと読んで、解析サイトに載っていない情報を抽出したものです(2026/7/3取得)。</p>
+      <h3>スペックの性格<span class="src yt">YouTube</span></h3>
+      <ul>
+        <li><b>コイン単価4.1円の荒波スペック</b>(初代SAOは3.1円のマイルド仕様から大幅転換)。「初当りは軽くチャンスは多いが荒い。駆け抜けが多く、どこかでドカンと出すタイプ」が業界共通見解</li>
+        <li><span class="gold">設定5はエクストラ設定</span>との情報(一撃発)。初当り確率は設定4より重いのに機械割が高い=<b>大都お得意の「AT性能が強い設定5」</b>の可能性大。設定5示唆(幼少期画面など)が出た台は初当りが重くても粘る価値あり</li>
+      </ul>
+      <h3>バレットサークル(目押し介入要素!)<span class="src yt">YouTube</span></h3>
+      <ul>
+        <li>リール上に照準(サークル)が出現し、<b>サークル内にバレット図柄を止めるほどチャンスアップ</b>(1個<2個<3個)</li>
+        <li><span class="hot">サークルが出たら必ずバレット図柄を狙うこと</span> — 適当に消化すると損をする、本機の数少ない技術介入ポイント</li>
+        <li>スナイパーチャンス(5G継続)は<b>5G間に1回でもサークル内にバレット停止で勝利確定</b>(期待度50%)</li>
+      </ul>
+      <h3>通常時の補足<span class="src yt">YouTube</span></h3>
+      <ul>
+        <li>液晶ゲーム数は実G数ではなく<b>小役で加算されるポイント方式</b>。「シューティングチャンス」というゲーム数加算特化ゾーンあり → 液晶天井が早く来ることがある</li>
+      </ul>
+      <h3>AT中の特化ゾーン3種(性能一覧)<span class="src yt">YouTube</span></h3>
+      <table>
+        <tr><th>特化ゾーン</th><th>契機/継続</th><th>性能</th></tr>
+        <tr><td>ナイトバトル</td><td>7G+α</td><td>平均上乗せ約250枚。赤サークルで優遇、7図柄停止で3桁濃厚</td></tr>
+        <tr><td>シノンアタック</td><td>AT中の7揃い・ベルの一部</td><td>50〜1000枚(PVでは3000枚表示も)</td></tr>
+        <tr><td>スクールバンバンスプラッシュ</td><td>5G</td><td class="gold">平均約600枚</td></tr>
+      </table>
+      <h3>上位ATのループ構造<span class="src yt">YouTube</span></h3>
+      <ul>
+        <li>デス・ガンバトルは「エピソード+5G」構成で初回勝利期待度約50%。<b>上位AT終了後は獲得枚数に関係なく再度デス・ガンバトルへ突入し、勝率は初回よりアップ</b> → 勝てば再び上位、負けたら通常落ち(=上位ループ機)</li>
+        <li>上位AT中は<b>上乗せ全て3桁以上確定</b>、4桁上乗せの出現率もアップ</li>
+        <li>SC3回突破で上位挑戦権を取る流れは「からくりサーカス方式」と評されている</li>
+      </ul>
+      <h3>その他</h3>
+      <ul>
+        <li>ヘカートⅡの大型役物演出が激しい。<b>苦手なら演出カスタム推奨</b>との試打者の声</li>
+      </ul>
+      <h3>映像解析:朝イチ生活動画より(2026/7/3解析)<span class="src yt">YouTube映像</span></h3>
+      <p class="note"><a href="https://www.youtube.com/watch?v=pmBvQwpuVYM" target="_blank">「1週間SAO2の朝イチ生活」(6/25投稿)</a>を30秒ごとにコマ解析。字幕がない動画でも、編集テロップと液晶表示を映像から直接読み取ったもの。</p>
+      <ul>
+        <li><b>確定CZ「THE END」の実映像を確認</b>:テロップ「まさかのノーミスで上位CZ確定です」→ THE END中はミスなく消化できれば<span class="hot">上位CZ(デス・ガンバトル)確定級</span>の様子。約188G時点で出現しており、浅いG数でも確定CZは来る</li>
+        <li><b>「金文字」示唆が存在</b>:テロップ「なぜか金文字なんですけど…?」→ 文字色変化系の示唆(詳細解析待ち)。金文字が出たら続行寄りでOK</li>
+        <li>シューティングチャンス中は「<b>ヘカートⅡを入手しろ! 成功でShooting Charge突入!?</b>」というミッション形式。成功でゲーム数加算特化「シューティングチャージ」へ</li>
+        <li>特化ゾーン突入の契機として<b>「ボーナス図柄揃い」</b>のテロップを確認(BAR系図柄揃い=特化ゾーン)</li>
+        <li>AT終了後のテロップでも「<b>AT後は50G間引き戻しのチャンス</b>」と明言 → 50Gフォロー徹底の裏付け</li>
+      </ul>
+    </div>
+  </details>
+
+  <details open>
+    <summary>⏫ 天井・狙い目ボーダー・やめどき(最重要)</summary>
+    <div class="body">
+      <h3>天井(3種類ある)</h3>
+      <table>
+        <tr><th>種類</th><th>ゲーム数</th><th>恩恵</th></tr>
+        <tr><td>CZ間(実ゲーム数)</td><td class="hot">最大499G+α</td><td>CZ「スコードロンバトル」</td></tr>
+        <tr><td>CZ間(液晶ゲーム数)</td><td>最大800G+α(モード依存。天国100G+α/通常D 350G等)</td><td>CZ当選</td></tr>
+        <tr><td>AT間</td><td class="hot">最大1200G+α</td><td>AT「バレットオブバレッツ」</td></tr>
+      </table>
+      <ul>
+        <li>AT終了後に<b>350G天井への短縮抽選</b>あり</li>
+        <li>初回上位CZ失敗時はCZ天井が<span class="gold">256G+αに短縮</span>(=ほぼ0Gから打てる激アツ台)</li>
+      </ul>
+
+      <h3>狙い目ボーダー(攻略勢の実戦値)<span class="src note">note</span></h3>
+      <table>
+        <tr><th>状況</th><th>狙い目</th></tr>
+        <tr><td>通常(実ゲーム数CZ間)</td><td class="good">340G〜</td></tr>
+        <tr><td>液晶ゲーム数(必ず液晶側も確認)</td><td class="good">580G〜</td></tr>
+        <tr><td>AT間</td><td class="good">770G〜</td></tr>
+        <tr><td>設定変更後(256G天井)</td><td class="hot">120G〜</td></tr>
+        <tr><td>初回上位CZ失敗後(256G天井)</td><td class="hot">0G〜(全ツッパ級)</td></tr>
+      </table>
+
+      <h3>朝一・リセット</h3>
+      <table>
+        <tr><th>項目</th><th>設定変更(リセット)</th><th>電源OFF/ON(据え置き)</th></tr>
+        <tr><td>CZ天井</td><td class="gold">256G+αに短縮</td><td>引き継ぐ</td></tr>
+        <tr><td>内部状態・モード・有利区間</td><td>リセット</td><td>すべて引き継ぐ(液晶0でも内部継続)</td></tr>
+        <tr><td>GGOモード</td><td class="gold">「死銃」選択率優遇</td><td>引き継ぐ</td></tr>
+      </table>
+
+      <h3>やめどき ― 即ヤメ厳禁パターン<span class="src note">note</span></h3>
+      <ul>
+        <li>基本手順:CZ・AT終了後に<b>①PUSHボタンでボイス確認 → ②メニュー画面でアイテム・履歴確認 → ③液晶下部アイテム確認</b>、それから判断</li>
+        <li><span class="hot">続行(即ヤメ厳禁)</span>:黒星(緑・赤)/デス・ガン履歴あり/アミュスフィア赤/ヘカートⅡ赤/SCストック2個以上/前回死銃モード滞在(→50Gまでフォロー)</li>
+        <li>AT終了後は<span class="hot">50Gの引き戻し区間</span>を消化してからヤメ(<b>50G目のレア役は引き戻し濃厚</b>)</li>
+        <li>液晶G数が100Gに近いなら天国(100G+α)を確認してからヤメ</li>
+        <li>上位AT後の引き戻しは<b>勝利数を引き継ぐ</b>ので特に注意</li>
+      </ul>
+
+      <h3>有利区間リセットのタイミング</h3>
+      <ul>
+        <li>エンディング発生時の一部/AT終了時の一部/上位CZ「デス・ガンバトル」突入時の一部(ゲーム数によるリセットなし)</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>🧭 モード完全解説(知識介入の核心)</summary>
+    <div class="body">
+      <h3>液晶ゲーム数モード(5種類)</h3>
+      <p>規定液晶ゲーム数のCZ当選を管理。<span class="hot">天国に行くまでモード転落なし</span>(AT当選でも転落しない)= スルー回数が増えるほど美味しくなる。</p>
+      <table>
+        <tr><th>液晶G数</th><th>通常A</th><th>通常B</th><th>通常C</th><th>通常D</th><th>天国</th></tr>
+        <tr><td>50G</td><td class="c">△</td><td class="c">△</td><td class="c">△</td><td class="c">△</td><td class="c">◎</td></tr>
+        <tr><td>100G</td><td class="c">◎</td><td class="c">◎</td><td class="c">◎</td><td class="c">◎</td><td class="c hot">★天井</td></tr>
+        <tr><td>250G</td><td class="c">◎</td><td class="c">△</td><td class="c">◎</td><td class="c">◎</td><td class="c">-</td></tr>
+        <tr><td>350G</td><td class="c">△</td><td class="c">◎</td><td class="c">◎</td><td class="c hot">★天井</td><td class="c">-</td></tr>
+        <tr><td>500G</td><td class="c">◎</td><td class="c">△</td><td class="c">◎</td><td class="c">-</td><td class="c">-</td></tr>
+        <tr><td>650G</td><td class="c">△</td><td class="c">◎</td><td class="c">-</td><td class="c">-</td><td class="c">-</td></tr>
+        <tr><td>800G</td><td class="c hot">★天井</td><td class="c hot">★天井</td><td class="c">-</td><td class="c">-</td><td class="c">-</td></tr>
+      </table>
+      <p class="note">ゾーンまとめ → 通常A:100/250/500G、通常B:100/350/650G、通常C:100/250/350/500G、通常D:100G(350Gで天井)。<b>全モード共通で100Gが最初のチャンス</b>。</p>
+      <ul>
+        <li>モード移行契機:設定変更時/CZ・AT終了後</li>
+        <li>CZ失敗時に別途<b>天国移行抽選</b>、AT駆け抜け時に別途<b>モード昇格抽選</b>あり</li>
+        <li>前回350G付近での当選履歴 → 通常B/C滞在示唆。<b>前回100G当選→今回もCZ成立なら天国の可能性</b></li>
+      </ul>
+
+      <h3>GGOモード(滞在で機械割100%超)とメニュー画面のアイテム判別</h3>
+      <table>
+        <tr><th>モード</th><th>効果</th><th>対応アイテム(メニュー画面)</th></tr>
+        <tr><td>キリト</td><td>液晶CZ天井を最大500G短縮</td><td>光剣</td></tr>
+        <tr><td>詩乃</td><td>CZ当選をAT直撃に変換</td><td>アミュスフィア</td></tr>
+        <tr><td>シノン</td><td>AT中スナイパーチャンス高確率</td><td>ヘカートⅡ</td></tr>
+        <tr><td>死銃</td><td>SC1戦目がVSデス・ガン(リセット時優遇)</td><td class="hot">黒星</td></tr>
+      </table>
+      <p class="note">アイテムの色で信頼度アップ:<span class="hot">赤</span> > <span class="good">緑</span> > 青。<b>ヤメ台のメニュー画面チェックだけで拾える台が見つかる</b>のが本機最大の攻略ポイント。</p>
+
+      <h3>履歴画面・キャラ示唆</h3>
+      <ul>
+        <li><b>デス・ガン出現 = 死銃モード濃厚</b>(フォロー必須)</li>
+        <li><b>司会者 = モードアップ濃厚</b>(他の示唆と複合判断)</li>
+        <li>銃士X出現 = 死銃モード示唆の可能性</li>
+      </ul>
+
+      <h3>PUSHボイス(CZ・AT終了時)</h3>
+      <table>
+        <tr><th>ランプ/ボイス色</th><th>示唆</th></tr>
+        <tr><td>白・青</td><td>弱め</td></tr>
+        <tr><td>黄</td><td>中間</td></tr>
+        <tr><td>赤</td><td class="gold">強め(モード示唆として有効)</td></tr>
+        <tr><td>紫「LUKガン上げなのあなた!?だからかぁ…」</td><td class="hot">モードアップ濃厚</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>🎮 ゲームフロー・内部仕様</summary>
+    <div class="body">
+      <h3>通常時</h3>
+      <ul>
+        <li>「規定液晶ゲーム数」「バレットカウンター」「レア小役」のダブル抽選システムでCZ当選を目指す</li>
+      </ul>
+      <h3>バレットカウンター</h3>
+      <ul>
+        <li>共通ベル(<b>斜めベル揃い</b>)で1個獲得。<b>7個でCZ抽選(期待度約20%)</b></li>
+        <li>7個時のエフェクト色:青(デフォルト)&lt; <span class="gold">赤(チャンス)</span> &lt; <span class="hot">迷彩柄(激アツ)</span></li>
+      </ul>
+      <h3>CZ「スコードロンバトル」(期待度 約55%)</h3>
+      <ul>
+        <li>前半10G+後半4G。前半のバレット停止数が多いほど後半の勝利期待度アップ</li>
+        <li>CZ中レア役で弾痕獲得:<b>弾痕1個=AT期待度約10%</b>、強レア役ならAT濃厚</li>
+      </ul>
+      <h3>AT「バレットオブバレッツ」(純増約3.6枚/G)</h3>
+      <ul>
+        <li>初期150枚+αの<b>差枚数管理型</b>。上乗せは20〜2000枚</li>
+        <li>AT中CZ「スナイパーチャンス」:成功で100〜300枚上乗せ or 特化ゾーン。<b>最大3戦勝利でデス・ガンバトルの権利獲得</b>(3戦目までに必ず出現)</li>
+      </ul>
+      <h3>上位CZ「デス・ガンバトル」→ 上位AT「フルダイブ」(純増約7.2枚/G)</h3>
+      <ul>
+        <li>BAR図柄を揃えてからスタート</li>
+        <li>勝利後は「ウルティマナイトバトル」(<span class="gold">平均約850枚上乗せ</span>)または「絶剣」(<span class="hot">平均約3300枚上乗せ</span>)を経由して上位ATへ</li>
+        <li>絶剣:突入時点で2200枚+α上乗せ、さらに1100枚上乗せループの可能性。消化後は「ウルティマ状態」でデス・ガンバトル勝率大幅アップ</li>
+      </ul>
+      <h3>打ち方(通常時:左1st・BAR狙い)</h3>
+      <table>
+        <tr><th>左リール停止形</th><th>成立役</th></tr>
+        <tr><td>中段チェリー</td><td class="hot">ウルティマチェリー(1/16384)</td></tr>
+        <tr><td>角チェリー</td><td>弱チェリー(1/79.9)/強チェリー(1/327.7)</td></tr>
+        <tr><td>下段BAR</td><td>ハズレ/リプレイ/ベル/弱チャンス目</td></tr>
+        <tr><td>上段スイカ</td><td>スイカ(1/82.6)/強チャンス目A・B</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>🔍 設定判別・示唆一覧(完全版)</summary>
+    <div class="body">
+      <h3>AT初当り確率(設定差大)</h3>
+      <table>
+        <tr><th>設定</th><th>AT初当り</th><th>CZ初当り</th><th>機械割</th></tr>
+        <tr><td>1</td><td>1/386.2</td><td>1/238.4</td><td>97.6%</td></tr>
+        <tr><td>2</td><td>1/364.3</td><td>偶数優遇</td><td>-</td></tr>
+        <tr><td>3</td><td>1/368.1</td><td>-</td><td>-</td></tr>
+        <tr><td>4</td><td>1/326.8</td><td>-</td><td>-</td></tr>
+        <tr><td>5</td><td>1/340.6</td><td>-</td><td>-</td></tr>
+        <tr><td>6</td><td class="good">1/269.6</td><td class="good">1/191.7</td><td>114.9%</td></tr>
+      </table>
+      <p class="note">優遇順は 1&lt;3&lt;2&lt;5&lt;4&lt;6(偶数優遇)。設定4以上の目安は約1/340前後。CZは偶数かつ高設定ほど軽く、設定6は1/200を切る。<b>小役出現率では判別しにくい機種</b>なので、CZ間G数・終了画面・ボイス・アイテムで総合判断。</p>
+
+      <h3>設定差の大きい要素</h3>
+      <table>
+        <tr><th>要素</th><th>設定1</th><th>設定6</th><th>差</th></tr>
+        <tr><td>確定CZ(THE END)出現率</td><td>1/20177.5</td><td class="hot">1/7077.2</td><td>約2.8倍</td></tr>
+        <tr><td>強チャンス目からの確定CZ当選率</td><td>0.4%</td><td class="hot">5.1%</td><td class="hot">約12.8倍</td></tr>
+        <tr><td>曠野の決闘 突入率</td><td>1/128.0</td><td class="good">1/64.0</td><td>2倍</td></tr>
+        <tr><td>強チェリーのCZ当選率(通常時)</td><td>20%</td><td class="good">33%</td><td>-(高確中は50〜60%)</td></tr>
+      </table>
+      <ul>
+        <li>スイカからのスナイパーチャンス当選率:偶数設定優遇</li>
+        <li>GGOモード滞在率:高設定ほど優遇/SCのデス・ガン選択率:設定5優遇</li>
+        <li><b>CZ失敗時のアイテム獲得率</b>にも設定差あり</li>
+      </ul>
+
+      <h3>AT終了画面(全11パターン)</h3>
+      <table>
+        <tr><th>画面</th><th>示唆</th></tr>
+        <tr><td>キリト&シノン</td><td>デフォルト</td></tr>
+        <tr><td>制服</td><td>奇数設定示唆</td></tr>
+        <tr><td>ソファー</td><td>偶数設定示唆</td></tr>
+        <tr><td>木漏れ日</td><td>高設定示唆(弱)</td></tr>
+        <tr><td>夏祭り</td><td>高設定示唆(強)</td></tr>
+        <tr><td>ワイシャツ</td><td>設定2以上濃厚</td></tr>
+        <tr><td>お風呂</td><td>設定3以上濃厚</td></tr>
+        <tr><td>水着</td><td class="gold">設定4以上濃厚</td></tr>
+        <tr><td>幼少期</td><td class="gold">設定5以上示唆(設定6より5で出やすい)</td></tr>
+        <tr><td>パジャマ</td><td class="hot">設定6濃厚</td></tr>
+      </table>
+
+      <h3>トロフィー(コパンダ)</h3>
+      <table>
+        <tr><th>色</th><th>示唆</th></tr>
+        <tr><td>銅</td><td>設定2以上濃厚</td></tr>
+        <tr><td>銀</td><td>設定3以上濃厚</td></tr>
+        <tr><td>金</td><td class="gold">設定4以上濃厚</td></tr>
+        <tr><td>イナズマ(キリン柄)</td><td class="gold">設定5以上濃厚</td></tr>
+        <tr><td>虹</td><td class="hot">設定6濃厚</td></tr>
+      </table>
+
+      <div class="tool">
+        <b>📊 初当り確率チェッカー</b>
+        <label>総ゲーム数 <input type="number" id="sao2-g" placeholder="例: 3000"></label>
+        <label>AT初当り回数 <input type="number" id="sao2-at" placeholder="例: 10"></label>
+        <button onclick="calc('sao2',[386.2,364.3,368.1,326.8,340.6,269.6])" style="margin-top:8px;padding:6px 16px;border-radius:6px;border:none;background:var(--accent);font-weight:bold;cursor:pointer;">計算</button>
+        <div class="result" id="sao2-result"></div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>📝 実戦メモ(自動保存)</summary>
+    <div class="body">
+      <textarea class="memo" id="memo-sao2" placeholder="実戦で気づいたこと、店の癖、示唆の出現状況などをメモ(この端末に自動保存されます)"></textarea>
+    </div>
+  </details>
+</section>
+
+<!-- ============================================================ 戦国乙女5 -->
+<section id="otome5" class="machine">
+  <div class="meta">
+    <b>L戦国乙女5 業火を穿つ宿焔の双刃</b>(オリンピア)/ 2026年6月8日導入 / AT機<br>
+    <span class="pill">純増 約2.7枚/G</span><span class="pill">上位AT 約4.8枚/G</span><span class="pill">ED中 約6.9枚/G</span><span class="pill">約31G/50枚</span><span class="pill">機械割 97.9〜114.9%</span>
+  </div>
+
+  <details open>
+    <summary>🆕 最新ネタ・実戦情報(SNS/YouTube発)</summary>
+    <div class="body">
+      <h3>2026/7/4 新着動画(直近1週間・新着順取得)</h3>
+      <ul>
+        <li><span class="src yt">YouTube</span><a href="https://www.youtube.com/watch?v=1-FJoFaQbl0" target="_blank">上位入れたら勝てるよね?【戦国乙女5】(7/3投稿)</a> — 字幕なしのため映像解析済み(下の🎥セクション参照)。実戦の生々しい浮き沈みが見られる一本</li>
+        <li><span class="src yt">YouTube</span><a href="https://www.youtube.com/watch?v=89wgUxWMuXA" target="_blank">今回の優勝は大友ソウリンです。【万枚】(7/3投稿)</a> — ソウリン&ホウジョウの「双」出陣ボーナスなど、上位AT・オウガイバトルの実戦音声を確認(字幕は音声認識精度が低く聞き取り不可な箇所多数)</li>
+        <li><span class="src yt">YouTube</span><a href="https://www.youtube.com/watch?v=fYW6Lt3ULX0" target="_blank">戦国乙女をあまり知らずに打ったらクソ楽しかった件(7/3投稿)</a> / <a href="https://www.youtube.com/watch?v=fMJqxybEn6o" target="_blank">ついに乙女の最新作が(6/30投稿)</a></li>
+      </ul>
+      <h3>2026/7/4 収集分</h3>
+      <ul>
+        <li><span class="src x">X</span>複数店舗で5,000枚超の実戦報告が継続:<b>メガガイア柳井店 638番台 9,749枚</b>、<b>ガーデン東大宮店 814番台 8,430枚</b>など。上位AT+エンディング(純増6.9枚)到達時の一撃力は依然健在</li>
+        <li><span class="src note">note</span><span class="hot">【攻略変化】</span>攻略勢の新しい狙い方として「<b>差枚+900〜1000枚以上の0G台を優先して1周期だけ見る</b>」という<b>差枚基準の立ち回り</b>が紹介されている。従来の「ゲーム数・周期天井狙い」に加えて、<b>据え置き狙いでは差枚のプラス幅そのものを目安にする</b>という新しい視点(優先度: 差枚+900枚以上の0G台 > プラス域の1周期狙い > 強ストラップ/強終了画面後 > リセット後0G)</li>
+      </ul>
+      <h3>2026/7/3 新着動画(直近1週間・新着順取得)</h3>
+      <ul>
+        <li><span class="src yt">YouTube</span><a href="https://www.youtube.com/watch?v=7-6rcyfAfwE" target="_blank">【高設定!?】初当たりから上位に2回入れた結果(新台の村田×JIRO)</a> — 高設定域の上位突入頻度の参考に</li>
+        <li><span class="src yt">YouTube</span><a href="https://www.youtube.com/watch?v=G9C7jJvAD3A" target="_blank">『これが乙女5の万枚コースなんだなぁ』2話連続神回(HYO.マコト)</a> — 万枚到達の勝ちパターン(上位AT+エンディングループ)の実例</li>
+        <li><span class="src yt">YouTube</span><a href="https://www.youtube.com/watch?v=KomdUWfvUF0" target="_blank">戦国乙女5が流行らない3つの理由と最大の原因(養分の実践レビュー)</a> — 批判側の視点。純増2.7枚の遅さ・本能寺の敗北感などが指摘されており、<b>店の扱い(設定状況)が今後変わる可能性</b>を読む材料に</li>
+        <li><span class="src yt">YouTube</span><a href="https://www.youtube.com/watch?v=lpgsQ3xaBXQ" target="_blank">いそまるの成り上がり新台録(乙女5回)</a> / <a href="https://www.youtube.com/watch?v=mbjyEHELRJI" target="_blank">1週間乙女5の朝イチ生活(6/18投稿・リセット狙い検証)</a></li>
+      </ul>
+      <h3>2026/7/3 収集分</h3>
+      <ul>
+        <li><span class="src x">X</span><b>万枚報告が複数店舗で発生</b>(8,000〜12,000枚超の報告多数)。上位AT+エンディング(純増6.9枚)まで到達したときの出玉性能は本物</li>
+        <li><span class="src x">X</span>「設定推測の楽しみがある」という評価が多く、<b>示唆(スタンプ・ゾロ目枚数)がよく出る機種</b>。逆に「展開ひとつで結果が変わる」=引き戻しと本能寺の勝率次第で荒れるという声も</li>
+        <li><span class="src x">X</span>朝一需要が高く<b>ほぼ満席の店も報告される高稼働機</b>。増台・大量導入店も多い → 設定投入に期待できる機種として扱われている</li>
+        <li><span class="src blog">実戦値</span>1周期目の引き戻し(約40%)が強いため、<b>「AT後即ヤメ台の1周期だけ拾う」立ち回りが攻略勢の定番化</b>しつつある。1周期目は200G以内到達濃厚なので投資も軽い</li>
+        <li><span class="src note">note</span>攻略勢は「有利区間リセット条件」「差枚数別の期待値」「<b>ゴエモン依頼ポイント</b>」に注目して研究中(pamiruo氏・ツラヌキメソッド氏の有料noteで期待値表が公開されている)</li>
+      </ul>
+      <h3>参考になるYouTube動画</h3>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=OEMAizOPiS8" target="_blank">L戦国乙女5が直AT化!!乙女4から大幅進化した完全後継機を徹底解説</a> — 仕様解説</li>
+        <li><a href="https://www.youtube.com/watch?v=5CC2OVMb6qs" target="_blank">全設定バトルロワイヤル 第16回</a> — <b>全設定の挙動比較(判別の参考に最適)</b></li>
+        <li><a href="https://www.youtube.com/watch?v=W42dpGdIZ7Q" target="_blank">設定6実戦(ぜるすろ)</a> — 設定6の実挙動</li>
+        <li><a href="https://www.youtube.com/watch?v=AwcunOCeubo" target="_blank">朝イチ速攻ロングフリーズ実戦</a> / <a href="https://www.youtube.com/watch?v=hYb3sfe0Ksc" target="_blank">ユウサイの最強ボーナス実戦</a>(出陣ボーナスはユウサイが平均421.8Gで最強)</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>🎥 YouTube深掘り(動画の中身を字幕から抽出)</summary>
+    <div class="body">
+      <p class="note">解説動画の字幕を丸ごと読んで、解析サイトに載っていない情報を抽出したものです(2026/7/3取得)。</p>
+      <h3>スペックの性格<span class="src yt">YouTube</span></h3>
+      <ul>
+        <li><b>直AT化</b>(初当り=AT確定)が前作乙女4からの最大の変化。乙女4は「ボーナスからAT非突入」が辛かったが、今作は当てれば必ずATがやれる</li>
+        <li>コイン単価約3.5円(乙女4は3.3円)で<b>少し荒くなった</b>程度。SAO2(4.1円)よりだいぶマイルド</li>
+        <li>前作乙女4は稼働貢献45週の大ヒット → 今作も長期設置・設定投入が見込まれる機種</li>
+      </ul>
+      <h3>周期・液晶ゲーム数の重要仕様<span class="src yt">YouTube</span></h3>
+      <ul>
+        <li>液晶ゲーム数は<b>「強カワチャンス」で加算されるポイント方式</b>(全役で強カワチャンス突入抽選)→ 液晶上の周期到達は実G数より早く来ることがある</li>
+        <li>1周期は最大500Gだが、<span class="gold">1周期目のみ最大200G</span>で前兆「繚乱の刻」に突入(AT後の1周期フォローが軽い根拠)</li>
+        <li>周期モードの内訳:通常A=最大6周期/通常B=最大3周期/天国=最大1周期。<b>通常Bなら最悪でも3周期でAT</b>なのでモード示唆(ヒデヨシのセリフ等)は必ずチェック</li>
+      </ul>
+      <h3>特殊CZ「オフロアタック」(解析サイト未掲載)<span class="src yt">YouTube</span></h3>
+      <ul>
+        <li>お風呂ステージ突入で<span class="hot">AT濃厚級</span>の特殊CZ。8GのSTタイプで敵は新キャラ石川ゴエモン</li>
+        <li>勝利するたびに報酬が昇格し8Gが再セット、さらに勝利ごとに出陣ボーナスストックも獲得</li>
+      </ul>
+      <h3>乙女アタックの補足<span class="src yt">YouTube</span></h3>
+      <ul>
+        <li>10戦して1回でも勝てばAT確定、<b>追加で勝利するごとに出陣ボーナスをストック</b>(=完走に近いほどストック増)</li>
+      </ul>
+      <h3>上位ATへの正確なルート(動画で判明した全体像)<span class="src yt">YouTube</span></h3>
+      <ul>
+        <li>メインATで目指すのは<b>本能寺の変6勝 → 「決戦ノ刻」確定</b>(6勝不要のケースもあり)。決戦ノ刻はヨシテル戦で勝率約55%、勝利で出陣ボーナス+上位CZ「剣聖チャンス」確定</li>
+        <li>剣聖チャンス(10G+α)の成功期待度は<b>ルートで変わる</b>:通常時初当りの5%で直行した場合=約51%/決戦ノ刻など経由=約70%</li>
+        <li><span class="gold">通常時の初当りの5%でいきなり剣聖チャンス(上位AT直行チャンス)</span>という隠しルートあり</li>
+        <li>本能寺の変は信長が敗北するまで継続する<b>連戦</b>になることもある</li>
+      </ul>
+      <h3>上位AT中の構造<span class="src yt">YouTube</span></h3>
+      <ul>
+        <li>上位中は本能寺の変が<b>カシンバトル</b>に変化。勝利で出陣ボーナス確定+勝利時の30%で<b>オウガイバトル</b>発展(カシン3勝で必ずオウガイ出現)</li>
+        <li>オウガイバトル勝利で特殊恩恵+剣聖チャンスの権利獲得 → <b>上位をループさせる構造</b></li>
+        <li>エンディング到達でも剣聖チャンスの権利がもらえる</li>
+      </ul>
+      <h3>出陣ボーナス「双」(新要素)<span class="src yt">YouTube</span></h3>
+      <ul>
+        <li>2人同時出陣の強力な出陣ボーナス。確認済みコンビ:<b>ヨシモト&イエヤス/ヒデヨシ&ノブナガ/ソウリン&ホウジョウ</b>(双キャラで平均最大316.4G上乗せ)</li>
+      </ul>
+      <h3>映像解析:設定6実戦の実データ(2026/7/3解析)<span class="src yt">YouTube映像</span></h3>
+      <p class="note">実戦動画(<a href="https://www.youtube.com/watch?v=W42dpGdIZ7Q" target="_blank">ぜるすろ・設定6実戦</a>)の映像を60秒ごとにコマ解析し、データカウンターの数字を時系列で読み取ったもの。</p>
+      <table>
+        <tr><th>経過</th><th>総回転</th><th>強カワRUSH回数</th><th>差枚</th></tr>
+        <tr><td>序盤</td><td>165G</td><td>0回</td><td>-276枚</td></tr>
+        <tr><td>中盤</td><td>996G</td><td>4回</td><td>-1,152枚</td></tr>
+        <tr><td>終盤</td><td>1,577G</td><td>5回</td><td class="hot">-1,928枚(最大ハマリ)</td></tr>
+        <tr><td>終了時</td><td>1,936G</td><td>8回</td><td class="hot">-1,853枚</td></tr>
+      </table>
+      <ul>
+        <li>AT初当りは<b>8回/1,936G=約1/242</b>で設定6の理論値(1/262.9)通りに当たっているのに、<span class="hot">差枚は最後まで約-1,850枚</span>。ボーナス(戦国乙女ボーナス)は0回</li>
+        <li>敗因は<b>本能寺の変の連敗とAT駆け抜け</b>。つまり本機は「初当りが設定6ペースでも展開が悪いと2,000Gで-2,000枚レベルまで負ける」</li>
+        <li><b>実戦への教訓:①初当り確率だけで高設定と判断して追わない(示唆物優先で判断)/②逆に、初当りが良いのに大きく凹んでいる台は高設定のまま捨てられている可能性がある</b> → 翌日その店の据え置き傾向次第では狙い目になる</li>
+      </ul>
+      <h3>映像解析:実戦の浮き沈み動画より(2026/7/4解析)<span class="src yt">YouTube映像</span></h3>
+      <p class="note"><a href="https://www.youtube.com/watch?v=1-FJoFaQbl0" target="_blank">「上位入れたら勝てるよね?」(7/3投稿)</a>を30秒ごとにコマ解析。字幕が未生成の投稿直後動画だったため、編集テロップと液晶表示を映像から直接読み取ったもの。</p>
+      <ul>
+        <li><b>実測で「180G = 1周期」の表示を確認</b>。テロップ「180G 1周期」の直接表示があり、1周期の長さが仕様通り(最大500G+α)の範囲内で実際に180G前後で回ってくることが確認できた</li>
+        <li><b>「ランク」概念の存在を示すテロップを確認</b>:「自力でも勝ってるからランク1個昇格ですね」「オール緑ってことはランク1個上がってたのかも」→ 自力(本能寺の変などのバトル)で勝利を重ねると何らかの「ランク」が上がり、以降の展開が有利になる仕組みがある模様。<b>解析サイト未掲載の要素で詳細不明</b>、続報待ち</li>
+        <li>「ヨシテルモード」の存在も画面から確認(「(´:ω`・)ヨシテルモードいたんだ…」のテロップ)。既知のヨシテルモード濃厚要素と符合</li>
+        <li>結末は「何も出来ずこの結果です」というテロップで終了 → <b>本機は展開(バトル勝率)次第で上位AT濃厚の状況からでも簡単に取りこぼす</b>ことを示す実例。設定6実戦データ(下記表)と合わせて、「初当りが良くても展開で負ける」荒さは本機共通の傾向と言える</li>
+      </ul>
+    </div>
+  </details>
+
+  <details open>
+    <summary>⏫ 天井・狙い目ボーダー・やめどき(最重要)</summary>
+    <div class="body">
+      <h3>天井(2種類ある)</h3>
+      <table>
+        <tr><th>種類</th><th>通常時</th><th>設定変更時</th><th>恩恵</th></tr>
+        <tr><td>ゲーム数(AT間・実G数)</td><td class="hot">999G+α</td><td class="gold">650G+α</td><td>AT当選</td></tr>
+        <tr><td>周期天井</td><td class="hot">最大6周期</td><td class="gold">最大4周期</td><td>AT当選</td></tr>
+      </table>
+
+      <h3>狙い目ボーダー(サイトごとの目安)</h3>
+      <table>
+        <tr><th>状況</th><th>狙い目</th><th>出典</th></tr>
+        <tr><td>等価</td><td class="good">AT間580G〜/5周期〜</td><td>すろぱちくえすと</td></tr>
+        <tr><td>56枚持ちメダル</td><td class="good">590G〜/5周期〜</td><td>すろぱちくえすと</td></tr>
+        <tr><td>56枚現金投資</td><td class="good">670G〜/5周期〜</td><td>すろぱちくえすと</td></tr>
+        <tr><td>等価(別サイト暫定)</td><td>550G〜(5.6枚なら650G〜)</td><td>なな徹</td></tr>
+        <tr><td class="hot">設定変更(リセット)後</td><td class="hot">280G〜</td><td>ちょんぼりすた</td></tr>
+      </table>
+      <p class="note">リセット後は天井650G+4周期に短縮されるので浅くから打てる。<b>周期数の確認が重要</b>(光吸い込み演出の色で残り周期示唆/赤い光は当該周期チャンス)。</p>
+
+      <h3><span class="hot">【攻略変化】</span>差枚基準の据え置き狙い(2026/7/4追加・note kamitan8192氏)</h3>
+      <p class="note">従来の「ゲーム数・周期天井狙い」に加え、<b>空き台の差枚表示そのものを目安にする立ち回り</b>が攻略勢の間で定番化しつつある。優先度の高い順:</p>
+      <ul>
+        <li class="good">① 差枚<b>+900〜1000枚以上</b>の0G台 → 最優先で1周期だけ様子見</li>
+        <li>② 差枚プラス域の1周期狙い</li>
+        <li>③ 強ストラップ/強終了画面が出た後の台</li>
+        <li>④ リセット後0G(280G〜、上表参照)</li>
+      </ul>
+      <p class="note">1周期の間にヒデヨシのセリフ・乙女ストラップ・アイキャッチ・終了画面・リセット状況を必ず確認し、続行/撤退を判断する。</p>
+
+      <h3>朝一・リセット恩恵</h3>
+      <ul>
+        <li>ゲーム数天井 999G→<span class="gold">650G</span>、周期天井 6周期→<span class="gold">4周期</span>に短縮</li>
+        <li>巫女ポイントはランダムな数値からスタート(早い0pt到達に期待)</li>
+      </ul>
+
+      <h3>やめどき</h3>
+      <ul>
+        <li>AT終了後は<span class="hot">1周期目までフォロー推奨</span>:1周期目のAT当選期待度は<b>約40%(設定1でも)</b>、1周期目は200G以内到達濃厚 → 引き戻し性能がかなり高い</li>
+        <li>ヤメる前に必ず<b>AT終了画面を確認</b>:ヨシテル濃厚画面・設定確定画面・モード濃厚画面が出ることがある</li>
+        <li>光吸い込み演出で<span class="gold">赤い光</span>が出たらその周期は必ずフォロー</li>
+        <li>剣聖チャンスアイコン獲得後は上位CZのチャンスなので続行</li>
+      </ul>
+
+      <h3>有利区間リセット</h3>
+      <ul>
+        <li>リセット条件:エンディング発生時/剣聖チャンスアイコン獲得後のAT終了時の一部</li>
+        <li>リセット時恩恵:<span class="hot">上位CZ「剣聖チャンス」突入濃厚</span>(設定変更時を除く)→ <b>エンディング後の台は即ヤメ厳禁・拾えたら激アツ</b></li>
+        <li>エンディング:有利区間差枚<b>+2400枚</b>到達で移行(純増約6.9枚/G)</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>🎮 ゲームフロー・内部仕様</summary>
+    <div class="body">
+      <h3>通常時(初当りは3ルート)</h3>
+      <ul>
+        <li><b>① 周期抽選</b>:規定ゲーム数到達で前兆ステージ「繚乱の刻」へ → 成功でAT</li>
+        <li><b>② CZ「乙女アタック」</b>:巫女ポイント0pt到達時の抽選(約20〜25%)で突入</li>
+        <li><b>③ ロングフリーズ「夢幻の如くフリーズ」</b>:リールロック3段階で発動 →「夢幻」へ</li>
+      </ul>
+
+      <h3>周期・巫女ポイント仕様</h3>
+      <ul>
+        <li>1周期は最大500G+α。周期テーブルは<b>A(最大6周期)/B(最大3周期)/天国(最大1周期)</b>の3種類</li>
+        <li>巫女ポイントは<b>999ptからスタートし毎ゲーム1pt以上減算</b>、0ptでCZ抽選</li>
+        <li>リプレイ:1pt減算(約94.9%)/弱レア役:30〜100pt減算/<span class="gold">強チェリー:999pt減算濃厚(=即CZ抽選)</span></li>
+        <li>ヒデヨシのセリフ<b>「壱、弐、四の刻が好機」= 周期テーブル示唆</b>(該当周期はフォロー)</li>
+      </ul>
+
+      <h3>繚乱の刻(周期到達時の前兆)</h3>
+      <ul>
+        <li><b>焔舞</b>:参戦キャラ数でチャンス度を示唆</li>
+        <li><b>紫炎</b>:AT期待度<span class="gold">約61.4%</span>(周期天井到達込み・設定1)。小役成立時にAT抽選</li>
+      </ul>
+
+      <h3>CZ「乙女アタック」(期待度 約52%)</h3>
+      <ul>
+        <li>20G継続(2G×10戦)。対戦相手別の期待度:オウガイ0.8% → ムラサメ5.4% → コタロウ42.2% → <span class="hot">シロ100%</span></li>
+        <li>リールロック2段階=シロ(勝利濃厚)</li>
+      </ul>
+
+      <h3>AT「強カワラッシュ」(純増約2.7枚/G)</h3>
+      <ul>
+        <li>初期45G+α。規定ゲーム数は初回最大220G、2回目以降最大370G</li>
+        <li><b>本能寺の変</b>:突入率1/114.8(設定1)、勝利期待度約50%、勝利で出陣ボーナス。3勝目からは「決戦ノ刻」期待度アップ</li>
+        <li><b>出陣チャンス</b>:白7揃い確率1/3.2で出陣乙女を決定(乙女ごとに上乗せ性能が変化)</li>
+        <li><b>出陣ボーナス</b>(疑似ボーナス20G)平均上乗せ:ノブナガ177.1G/<span class="gold">ユウサイ421.8G(最強)</span>/双キャラ最大316.4G</li>
+      </ul>
+
+      <h3>上位AT「真強カワラッシュ」(純増約4.8枚/G)</h3>
+      <ul>
+        <li>上位CZ「剣聖チャンス」成功で突入。初期100G+α</li>
+        <li>カシンバトル・オウガイバトル搭載。エンディング中は純増約6.9枚/G</li>
+      </ul>
+
+      <h3>打ち方</h3>
+      <ul>
+        <li>左リール上段付近にBAR狙い、停止形に応じて打ち分け。中リールは白7を目安にスイカ狙い</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary>🔍 設定判別・示唆一覧(完全版)</summary>
+    <div class="body">
+      <h3>AT初当り確率</h3>
+      <table>
+        <tr><th>設定</th><th>AT初当り</th><th>機械割</th></tr>
+        <tr><td>1</td><td>1/359.5</td><td>97.9%</td></tr>
+        <tr><td>6</td><td class="good">1/262.9</td><td>114.9%</td></tr>
+      </table>
+      <p class="note">高設定の目安は約1/270前後(設定2〜5の公表値は現時点未判明)。</p>
+
+      <h3>主要な設定差</h3>
+      <table>
+        <tr><th>要素</th><th>設定1</th><th>設定6</th></tr>
+        <tr><td>乙女アタック突入期待度(0pt到達時)</td><td>20.3%</td><td class="good">25.7%(設定5以上は約4回に1回)</td></tr>
+        <tr><td>戦国乙女ボーナス出現率(最大の設定差)</td><td>1/21206.7</td><td class="hot">1/5502.7(約4倍)</td></tr>
+        <tr><td>強カワチャンス出現率</td><td>1/36.8</td><td>高設定ほど優遇(数値未判明)</td></tr>
+        <tr><td>本能寺の変 突入率</td><td>1/114.8</td><td>-</td></tr>
+        <tr><td>出陣ボーナス確率</td><td>1/183.6</td><td>-</td></tr>
+      </table>
+
+      <h3>ボーナス終了画面(スタンプ)</h3>
+      <table>
+        <tr><th>スタンプ</th><th>示唆</th></tr>
+        <tr><td>可(例:塔)</td><td>設定2以上濃厚</td></tr>
+        <tr><td>吉</td><td>設定3以上濃厚</td></tr>
+        <tr><td>良(例:ゴエモン、ノブナガ&ミツヒデ)</td><td class="gold">設定3〜4以上濃厚</td></tr>
+        <tr><td>優(例:乙女集合)</td><td class="gold">設定5以上濃厚</td></tr>
+        <tr><td>極(例:ノブナガ)</td><td class="hot">設定6濃厚</td></tr>
+      </table>
+      <p class="note">※スタンプとキャラ画面の対応はサイトにより表記揺れあり。「可&lt;吉&lt;良&lt;優&lt;極」の順で強い、と覚えればOK。</p>
+
+      <h3>獲得枚数のゾロ目表示(OVER表示)</h3>
+      <ul>
+        <li>222枚=設定2以上、333枚=設定3以上、444枚=設定4以上、555枚=設定5以上、<span class="hot">666枚=設定6濃厚</span></li>
+      </ul>
+
+      <h3>その他の示唆</h3>
+      <ul>
+        <li>AT終了画面:乙女の人数が多いほど高設定示唆(1人→3人→4人)。<b>敵集合=ヨシテルモード濃厚</b></li>
+        <li>金文字=設定2以上、周期テーブル示唆と矛盾した場合=設定4以上</li>
+        <li><b>打-WIN LITE 隠れ凪セリフ</b>:金色「お肉〜♪お肉〜♪」=<span class="hot">設定6濃厚</span></li>
+        <li>エンディング中のキャラ紹介:初回登場キャラで設定示唆(詳細は解析中)</li>
+      </ul>
+
+      <div class="tool">
+        <b>📊 初当り確率チェッカー</b>
+        <label>総ゲーム数 <input type="number" id="otome5-g" placeholder="例: 3000"></label>
+        <label>AT初当り回数 <input type="number" id="otome5-at" placeholder="例: 10"></label>
+        <button onclick="calc('otome5',[359.5,null,null,null,null,262.9])" style="margin-top:8px;padding:6px 16px;border-radius:6px;border:none;background:var(--accent);font-weight:bold;cursor:pointer;">計算</button>
+        <div class="result" id="otome5-result"></div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>📝 実戦メモ(自動保存)</summary>
+    <div class="body">
+      <textarea class="memo" id="memo-otome5" placeholder="実戦で気づいたこと、店の癖、示唆の出現状況などをメモ(この端末に自動保存されます)"></textarea>
+    </div>
+  </details>
+</section>
+</main>
+
+<footer>
+  <b>情報源(2026年7月4日時点)</b>:
+  一撃/ちょんぼりすた/なな徹/DMMぱちタウン/アルテマ/すろぱちくえすと/X(Yahoo!リアルタイム検索経由)/YouTube各チャンネル/note(sorottto氏・sho_slo16氏・kamitan氏・pamiruo氏・ツラヌキメソッド氏) ほか。<br>
+  ※両機種とも2026年6月導入の新台のため、数値は解析の進行で更新される可能性があります。<br>
+  <b>更新履歴</b>:7/3 第2版 — モード完全解説・メニュー画面アイテム判別・狙い目ボーダー・SNS/YouTube最新ネタを追加。/ 7/3 第3版 — YouTube解説動画の字幕を解析し「🎥 YouTube深掘り」セクションを両機種に新設(特化ゾーン性能・上位ループ構造・オフロアタック・剣聖チャンス直行ルート等)。/ 7/3 第4版 — 実戦動画の映像をコマ解析する仕組みを導入。戦国乙女5の設定6実戦データ(1,936G・AT8回・差枚-1,853枚)を映像から読み取り追加。/ 7/3 第5版 — YouTubeを新着順(直近1週間優先)で取得する方式に変更。新着動画リストと「THE ENDノーミスで上位CZ確定」「金文字示唆」等の映像解析ネタを追加。/ 7/4 第6版 — SAO2: X実戦報告(7,890G+13,000枚等)とウルティマ状態(約1/2で突入)の追加解説。戦国乙女5: 万枚実戦報告(2店舗の具体数値)、映像解析で「180G=1周期」実測と「ランク」概念の存在を確認、note発の【攻略変化】差枚+900〜1000枚基準の据え置き狙いを追加。
+</footer>
+
+<script>
+function showTab(id, btn){
+  document.querySelectorAll('.machine').forEach(m=>m.classList.remove('show'));
+  document.getElementById(id).classList.add('show');
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+function calc(id, probs){
+  const g = parseFloat(document.getElementById(id+'-g').value);
+  const at = parseFloat(document.getElementById(id+'-at').value);
+  const out = document.getElementById(id+'-result');
+  if(!g || !at){ out.innerHTML = '<span style="color:var(--red)">総ゲーム数とAT回数を入力してください</span>'; return; }
+  const rate = g/at;
+  let best=0, bestDiff=Infinity;
+  probs.forEach((p,i)=>{ if(p && Math.abs(rate-p)<bestDiff){bestDiff=Math.abs(rate-p); best=i+1;} });
+  out.innerHTML = 'あなたの初当り: <b style="color:var(--accent)">1/'+rate.toFixed(1)+'</b><br>いちばん近い設定: <b style="color:var(--green)">設定'+best+'</b><br><span style="color:var(--sub);font-size:12px">※試行ゲーム数が少ないうちはブレます。3000G以上回してから参考にしてください。</span>';
+}
+// メモ自動保存
+document.querySelectorAll('.memo').forEach(t=>{
+  t.value = localStorage.getItem(t.id) || '';
+  t.addEventListener('input', ()=>localStorage.setItem(t.id, t.value));
+});
+</script>
+</body>
+</html>
